@@ -10,6 +10,6 @@ $SPARK_HOME/sbin/start-thriftserver.sh --master "local[4]" --conf "spark.sql.shu
 
 sleep 20
 
-$HIVE_HOME/bin/beeline -u jdbc:hive2://localhost:10000
+$HIVE_HOME/bin/beeline --showHeader=true -u jdbc:hive2://localhost:10000
 
 
