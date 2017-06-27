@@ -24,8 +24,9 @@ RUN curl -sL \
     | gunzip \
     | tar -x -C /opt/ \
   && rm -rf $HADOOP_HOME/share/doc \
-  && chown -R root:root $HADOOP_HOME
-
+  && chown -R root:root $HADOOP_HOME \
+  && mkdir -p $HADOOP_HOME/logs \
+  && chmod 777 $HADOOP_HOME/logs 
 
 ENV HIVE_VERSION=2.0.1
 ENV HIVE_HOME=/opt/apache-hive-$HIVE_VERSION-bin
@@ -38,7 +39,9 @@ RUN curl -sL \
   && chown -R root:root $HIVE_HOME \
   && mkdir -p $HIVE_HOME/hcatalog/var/log \
   && mkdir -p $HIVE_HOME/var/log \
-  && mkdir -p /data/hive/
+  && mkdir -p /data/hive/ \
+  && chmod 777 $HIVE_HOME/hcatalog/var/log \
+  && chmod 777 $HIVE_HOME/var/log \
 
 ENV SPARK_VERSION=2.1.1
 ENV SPARK_HOME=/opt/spark-$SPARK_VERSION-bin-hadoop2.7
@@ -49,13 +52,13 @@ RUN curl -sL \
     | gunzip \
     | tar -x -C /opt/ \
   && chown -R root:root $SPARK_HOME \
-  && mkdir -p /data/spark/
+  && mkdir -p /data/spark/ \
+  && mkdir -p $SPARK_HOME/logs \
+  && chmod 777 $SPARK_HOME/logs 
 
 ADD files/hive-site.xml $HIVE_CONF_DIR/
 ADD files/hive-site.xml $SPARK_CONF_DIR/
 ADD files/start.sh /
-
-RUN cd /data/hive ; $HIVE_HOME/bin/schematool -dbType derby -initSchema ; cd
 
 EXPOSE 22
 EXPOSE 4040
