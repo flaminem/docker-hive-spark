@@ -2,7 +2,7 @@
 
 echo "Starting docker, this will take around 30 seconds"
 
-echo "Creating user $USER with it $USER_ID"
+echo "Creating user $USER with id $USER_ID"
 useradd --uid $USER_ID --create-home $USER 
 
 su $USER << EOF
