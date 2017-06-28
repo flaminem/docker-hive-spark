@@ -36,7 +36,7 @@ RUN curl -sL \
   && mkdir -p $HIVE_HOME/var/log \
   && mkdir -p /data/hive/ \
   && chmod 777 $HIVE_HOME/hcatalog/var/log \
-  && chmod 777 $HIVE_HOME/var/log \
+  && chmod 777 $HIVE_HOME/var/log 
 
 # Install Spark
 ENV SPARK_VERSION=2.1.1
