@@ -1,20 +1,13 @@
 FROM openjdk:8-jdk
 MAINTAINER Furcy Pin
 
+# Install sbt
 ENV SBT_VERSION 0.13.15
-
-RUN apt-get update
-RUN mkdir -p /var/run/sshd
-RUN apt-get install -y openssh-server unzip
-RUN apt-get clean
-
 RUN wget http://dl.bintray.com/sbt/debian/sbt-${SBT_VERSION}.deb -O /tmp/sbt.deb && \
     dpkg -i /tmp/sbt.deb && \
     rm -f /tmp/sbt.deb
 
-RUN apt-get install -y git
-
-
+# Install Hadoop
 ENV HADOOP_VERSION=2.7.3
 ENV HADOOP_HOME /opt/hadoop-$HADOOP_VERSION
 ENV HADOOP_CONF_DIR=$HADOOP_HOME/conf
@@ -28,6 +21,8 @@ RUN curl -sL \
   && mkdir -p $HADOOP_HOME/logs \
   && chmod 777 $HADOOP_HOME/logs 
 
+
+# Install Hive
 ENV HIVE_VERSION=2.0.1
 ENV HIVE_HOME=/opt/apache-hive-$HIVE_VERSION-bin
 ENV HIVE_CONF_DIR=$HIVE_HOME/conf
@@ -43,6 +38,7 @@ RUN curl -sL \
   && chmod 777 $HIVE_HOME/hcatalog/var/log \
   && chmod 777 $HIVE_HOME/var/log \
 
+# Install Spark
 ENV SPARK_VERSION=2.1.1
 ENV SPARK_HOME=/opt/spark-$SPARK_VERSION-bin-hadoop2.7
 ENV SPARK_CONF_DIR=$SPARK_HOME/conf
@@ -56,6 +52,7 @@ RUN curl -sL \
   && mkdir -p $SPARK_HOME/logs \
   && chmod 777 $SPARK_HOME/logs 
 
+# Configure
 ADD files/hive-site.xml $HIVE_CONF_DIR/
 ADD files/hive-site.xml $SPARK_CONF_DIR/
 ADD files/start.sh /
