@@ -1,8 +1,8 @@
 # Hive Metastore + Spark Thriftserver preconfigured docker
 
 
-This docker can be used as a sandbox for using flamy.
-
+This docker can be used as a sandbox for testing [flamy](https://github.com/flaminem/flamy).
+It is required to run the second part of [flamy's demo](http://flamy.readthedocs.io/en/latest/Demo.html).
 
 
 Run this command to build the docker image (might require sudo rights)
