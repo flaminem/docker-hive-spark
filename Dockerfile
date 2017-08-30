@@ -19,6 +19,8 @@ RUN curl -sL \
   && rm -rf $HADOOP_HOME/share/doc \
   && chown -R root:root $HADOOP_HOME \
   && mkdir -p $HADOOP_HOME/logs \
+  && mkdir -p $HADOOP_CONF_DIR \
+  && chmod 777 $HADOOP_CONF_DIR \
   && chmod 777 $HADOOP_HOME/logs 
 
 
@@ -35,11 +37,15 @@ RUN curl -sL \
   && mkdir -p $HIVE_HOME/hcatalog/var/log \
   && mkdir -p $HIVE_HOME/var/log \
   && mkdir -p /data/hive/ \
+  && mkdir -p $HIVE_CONF_DIR \
   && chmod 777 $HIVE_HOME/hcatalog/var/log \
   && chmod 777 $HIVE_HOME/var/log 
 
+RUN ln -s $HADOOP_HOME/share/hadoop/tools/lib/aws-java-sdk-1.7.4.jar $HIVE_HOME/lib/. 
+RUN ln -s $HADOOP_HOME/share/hadoop/tools/lib/hadoop-aws-2.7.3.jar $HIVE_HOME/lib/. 
+
 # Install Spark
-ENV SPARK_VERSION=2.1.1
+ENV SPARK_VERSION=2.2.0
 ENV SPARK_HOME=/opt/spark-$SPARK_VERSION-bin-hadoop2.7
 ENV SPARK_CONF_DIR=$SPARK_HOME/conf
 ENV PATH $PATH:$SPARK_HOME/bin
@@ -50,6 +56,7 @@ RUN curl -sL \
   && chown -R root:root $SPARK_HOME \
   && mkdir -p /data/spark/ \
   && mkdir -p $SPARK_HOME/logs \
+  && mkdir -p $SPARK_CONF_DIR \
   && chmod 777 $SPARK_HOME/logs 
 
 RUN ln -s $HADOOP_HOME/share/hadoop/tools/lib/aws-java-sdk-1.7.4.jar $SPARK_HOME/jars/. 
