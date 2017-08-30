@@ -52,6 +52,9 @@ RUN curl -sL \
   && mkdir -p $SPARK_HOME/logs \
   && chmod 777 $SPARK_HOME/logs 
 
+RUN ln -s $HADOOP_HOME/share/hadoop/tools/lib/aws-java-sdk-1.7.4.jar $SPARK_HOME/jars/. 
+RUN ln -s $HADOOP_HOME/share/hadoop/tools/lib/hadoop-aws-2.7.3.jar $SPARK_HOME/jars/. 
+
 # Configure
 ADD files/hive-site.xml $HIVE_CONF_DIR/
 ADD files/hive-site.xml $SPARK_CONF_DIR/
