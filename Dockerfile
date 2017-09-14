@@ -66,13 +66,14 @@ RUN ln -s $HADOOP_HOME/share/hadoop/tools/lib/hadoop-aws-2.7.3.jar $SPARK_HOME/j
 ADD files/hive-site.xml $HIVE_CONF_DIR/
 ADD files/hive-site.xml $SPARK_CONF_DIR/
 ADD files/start.sh /
+ADD files/init.sh /
 
 EXPOSE 22
 EXPOSE 4040
 EXPOSE 9083
 EXPOSE 10000
 
-ENTRYPOINT ["/start.sh"]
+ENTRYPOINT ["/beeline.sh"]
 
 
 
