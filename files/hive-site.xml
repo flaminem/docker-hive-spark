@@ -20,4 +20,8 @@
     <name>hive.enable.spark.execution.engine</name>
     <value>false</value>
   </property>
+  <property>
+    <name>hive.exec.stagingdir</name>
+    <value>/tmp/hive/hive-staging</value>
+  </property>
 </configuration>
