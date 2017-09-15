@@ -67,6 +67,7 @@ ADD files/hive-site.xml $HIVE_CONF_DIR/
 ADD files/hive-site.xml $SPARK_CONF_DIR/
 ADD files/start.sh /
 ADD files/init.sh /
+ADD files/beeline.sh /
 
 EXPOSE 22
 EXPOSE 4040
