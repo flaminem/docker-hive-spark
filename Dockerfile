@@ -59,6 +59,10 @@ RUN curl -sL \
   && mkdir -p $SPARK_CONF_DIR \
   && chmod 777 $SPARK_HOME/logs 
 
+# Install Readline Wrapper
+RUN apt-get update && apt-get install -y rlwrap \
+ && rm -rf /var/lib/apt/lists/*
+
 RUN ln -s $HADOOP_HOME/share/hadoop/tools/lib/aws-java-sdk-1.7.4.jar $SPARK_HOME/jars/. 
 RUN ln -s $HADOOP_HOME/share/hadoop/tools/lib/hadoop-aws-2.7.3.jar $SPARK_HOME/jars/. 
 
