@@ -2,6 +2,8 @@ FROM openjdk:8-jdk
 MAINTAINER Furcy Pin
 
 # Install sbt
+RUN apt-get update
+RUN apt-get -y install openjdk-8-jdk
 ENV SBT_VERSION 0.13.15
 RUN wget http://dl.bintray.com/sbt/debian/sbt-${SBT_VERSION}.deb -O /tmp/sbt.deb && \
     dpkg -i /tmp/sbt.deb && \
